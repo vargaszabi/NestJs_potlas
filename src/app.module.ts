@@ -2,6 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CharachterModule } from './charachter/charachter.module';
+import { PlayerModule } from './player/player.module';
+import { Character } from './charachter/entities/charachter.entity';
+import { Player } from './player/entities/player.entity';
 
 @Module({
   imports: [
@@ -11,12 +15,14 @@ import { AppService } from './app.service';
       port: parseInt(process.env.DB_PORT) || 3306,
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || '',
-      database: process.env.DB_DATABASE || 'database',
+      database: process.env.DB_DATABASE || 'jatek',
       entities: [
-        /* List of entities here */
+        Player, Character
       ],
       synchronize: true,
     }),
+    CharachterModule,
+    PlayerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
